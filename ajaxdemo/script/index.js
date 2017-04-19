@@ -39,7 +39,7 @@ function search_main(obj, url) {
             var data = JSON.parse(request.responseText);
             if (data.success) {
                 if (data.xianding) {
-                    if(data.msg == ''){
+                    if(data.msg == '?'){
                         $(obj).value = '没有链接'
                     }else{
                         $(obj).value = data.msg + 'keyword=' + UrlEncode(data.text);     
