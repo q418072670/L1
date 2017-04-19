@@ -8,7 +8,7 @@ function bindEvent() {
         textCt = ["textWP","textMP"],
         sexyCt = ["WL3","ML3"],
         ab = $('ab').value;
-    keyword = keyword.replace("搜索", "").replace(/\"/g,"").replace(/\s/g, "");
+    keyword = keyword.replace("搜索", "").replace(/\"/g,"").replace(/\/\s/, "\/");
     var keywordArr = keyword.split("/");
     for (var i = 0; i < keywordArr.length; i++) {
         for (var j = 0; j < keywordArr[i].split("-").length; j++) {
@@ -21,7 +21,7 @@ function bindEvent() {
     sexyCt.forEach(function(currentvalue,index){
         search_main(currentvalue,"WL3/add.php?wm=" + b[index][0] + "&name=" + b[index][1] + "&link=" + b[index][2] + "&dian=" + ab)
     })
-
+}
 
 function render(textval,val){
     $(textval).innerText = val;
