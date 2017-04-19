@@ -21,10 +21,7 @@ function bindEvent() {
     sexyCt.forEach(function(currentvalue,index){
         search_main(currentvalue,"WL3/add.php?wm=" + b[index][0] + "&name=" + b[index][1] + "&link=" + b[index][2] + "&dian=" + ab)
     })
-    // search_main("WL3", "WL3/add.php?wm=" + b[0][0] + "&name=" + b[0][1] + "&link=" + b[0][2] + "&dian=" + ab);
-      
-    // search_main("ML3", "WL3/add.php?wm=" + b[1][0] + "&name=" + b[1][1] + "&link=" + b[1][2] + "&dian=" + ab);
-}
+
 
 function render(textval,val){
     $(textval).innerText = val;
@@ -39,20 +36,17 @@ function search_main(obj, url) {
             var data = JSON.parse(request.responseText);
             if (data.success) {
                 if (data.xianding) {
-                    if(data.msg == '?'){
+                    if(data.msg == '?' || data.msg == '&'){
                         $(obj).value = '没有链接'
                     }else{
-                        $(obj).value = data.msg + 'keyword=' + UrlEncode(data.text);     
-                    }                 
-                    
+                        $(obj).value = data.msg + 'keyword=' + UrlEncode(data.text);    
+                    }                     
                 } else {
                     $(obj).value = data.msg;
                 }
-
             } else {
                 $(obj).value = "出现错误：" + data.msg;
             }
-
         }
     }
 }
