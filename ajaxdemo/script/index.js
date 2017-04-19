@@ -1,4 +1,4 @@
-function $(id) {
+function _(id) {
     return document.getElementById(id);
 }
 
@@ -7,7 +7,7 @@ function bindEvent() {
         keyword = document.getElementById('keyword').value,
         textCt = ["textWP","textMP"],
         sexyCt = ["WL3","ML3"],
-        ab = $('ab').value;
+        ab = _('ab').value;
     keyword = keyword.replace("搜索", "").replace(/\"/g,"").replace(/\/\s/, "\/");
     var keywordArr = keyword.split("/");
     for (var i = 0; i < keywordArr.length; i++) {
@@ -24,7 +24,7 @@ function bindEvent() {
 }
 
 function render(textval,val){
-    $(textval).innerText = val;
+    _(textval).innerText = val;
 
 }
 function search_main(obj, url) {
@@ -37,15 +37,15 @@ function search_main(obj, url) {
             if (data.success) {
                 if (data.xianding) {
                     if(data.msg == '?' || data.msg == '&'){
-                        $(obj).value = '没有链接'
+                        _(obj).value = '没有链接'
                     }else{
-                        $(obj).value = data.msg + 'keyword=' + UrlEncode(data.text);    
+                        _(obj).value = data.msg + 'keyword=' + UrlEncode(data.text);    
                     }                     
                 } else {
-                    $(obj).value = data.msg;
+                    _(obj).value = data.msg;
                 }
             } else {
-                $(obj).value = "出现错误：" + data.msg;
+                _(obj).value = "出现错误：" + data.msg;
             }
         }
     }
@@ -53,6 +53,77 @@ function search_main(obj, url) {
 
 
 
-$('search').onclick = function(){
+_('search').onclick = function(){
     bindEvent();
 }
+
+// 模态框逻辑
+!function(){
+    var pageSelect = _('pageSelect'),
+        pageSelectlist = _('pageSelectlist'),
+        pageSelectOption = {
+            "--请选择类别--": "",
+            "WL3":"WL3",
+            "ML3":"ML3",
+            "通栏":"TL"
+        },
+        pageSelectlistOption = {            
+            "women": {
+                "外套": "外套",
+                "T恤背心": "T恤背心",
+                "衬衫": "衬衫",
+                "SPORTS": "SPORTS",
+                "针织衫": "针织衫",
+                "牛仔裤": "牛仔裤"
+            },
+            "men":{
+                "外套": "外套",
+                "T恤背心": "T恤背心",
+                "休闲衬衫": "休闲衬衫",
+                "商务衬衫": "商务衬衫",
+                "SPORTS": "SPORTS",
+                "长裤": "长裤"
+            },
+            "限定": {
+                "W限定L3": "W限定L3",
+                "M限定L3": "M限定L3"
+            }
+        }
+        pageSelectArr = [],
+        pageSelectlistArr = [],
+        womenlistArr = [],
+        menlistArr = [],
+        limitedlistArr = [];
+
+        for(var key in pageSelectOption){
+            pageSelectArr.push(new Option(key,pageSelectOption[key]))
+        }       
+        pageSelectArr.forEach(function(currentvalue,index){
+            pageSelect.options[index] = currentvalue;
+        })     
+
+       
+        for(var key in pageSelectlistOption["women"]){            
+            womenlistArr.push(new Option(key,pageSelectlistOption["women"][key]))           
+        }
+        for(var key in pageSelectlistOption["men"]){            
+            menlistArr.push(new Option(key,pageSelectlistOption["men"][key]))     
+        }
+        for(var key in pageSelectlistOption["限定"]){            
+            limitedlistArr.push(new Option(key,pageSelectlistOption["限定"][key]))     
+        }
+
+        pageSelectlistArr.push(new Array(new Option("--请选择--","")))
+        pageSelectlistArr.push(womenlistArr)
+        pageSelectlistArr.push(menlistArr)
+        pageSelectlistArr.push(limitedlistArr)
+        
+        pageSelect.addEventListener('change',function(e){
+            pageSelectlist.options.length = 0;
+            var index = e.target.selectedIndex;
+            for(var i = 0; i< pageSelectlistArr[index].length;i++){
+                pageSelectlist.options[i] = pageSelectlistArr[index][i];
+            }        
+        })
+
+}()
