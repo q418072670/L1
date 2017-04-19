@@ -18,7 +18,7 @@ function bindEvent() {
     textCt.forEach(function(currentvalue,index){
         render(currentvalue,b[index].join(""));
     })
-    sexyCt.forEach(function(currentValue,index){
+    sexyCt.forEach(function(currentvalue,index){
         search_main(currentvalue,"WL3/add.php?wm=" + b[index][0] + "&name=" + b[index][1] + "&link=" + b[index][2] + "&dian=" + ab)
     })
     // search_main("WL3", "WL3/add.php?wm=" + b[0][0] + "&name=" + b[0][1] + "&link=" + b[0][2] + "&dian=" + ab);
@@ -38,8 +38,13 @@ function search_main(obj, url) {
         if (request.readyState === 4 && request.status === 200) {
             var data = JSON.parse(request.responseText);
             if (data.success) {
-                if (data.xianding) {                    
-                    $(obj).value = data.msg + 'keyword=' + UrlEncode(data.text);     
+                if (data.xianding) {
+                    if(data.msg == ''){
+                        $(obj).value = '没有链接'
+                    }else{
+                        $(obj).value = data.msg + 'keyword=' + UrlEncode(data.text);     
+                    }                 
+                    
                 } else {
                     $(obj).value = data.msg;
                 }
