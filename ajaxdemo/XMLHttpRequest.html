@@ -86,14 +86,20 @@ function search_main(obj,lin){
 document.getElementById("save").onclick = function() {
 	var wm1=document.getElementById("wm").value;
 	var link0=document.getElementById("staffLink").value;
+	var biao=document.getElementById("aa").value;
+	var name=document.getElementById("staffNumber").value; 
+	var link1;
 	if(link0[1]&&wm1!="tl"){
-		var link1=link0.split("?")[0]+"#"+link0.split("?")[1].split("#")[1];
+		if(name==biao){
+			link1=link0.split("?")[0];
+			}else{
+		link1=link0.split("?")[0]+"#"+link0.split("?")[1].split("#")[1];}
 	}else{
 			if(document.getElementById("ab1").value=="b"){
 				var linb=link0.split("scid=");
-				var link1="http://www.uniqlo.cn/search.htm?scid="+linb[1].split("&")[0];
+				link1="http://www.uniqlo.cn/search.htm?scid="+linb[1].split("&")[0];
 				}else{
-					var link1=link0.split("?")[0];
+					link1=link0.split("?")[0];
 				}
 			
 	}
@@ -133,8 +139,8 @@ function save_main(obj){
         var arr_prov=new Array(new Option("--请选择类别--",''),new Option("WL3","WL3"),new Option("ML3","ML3"),new Option("通栏","tl"));
         var arr_city=new Array();
         arr_city[0]=new Array(new Option("--请选择--",''));
-        arr_city[1]=new Array(new Option("外套",'外套'),new Option("T恤背心",'T恤背心'),new Option("衬衫",'衬衫'),new Option("SPORTS",'SPORTS'),new Option("针织衫",'针织衫'),new Option("牛仔裤",'牛仔裤'));
-        arr_city[2]=new Array(new Option("外套",'外套'),new Option("T恤背心",'T恤背心'),new Option("休闲衬衫",'休闲衬衫'),new Option("商务衬衫",'商务衬衫'),new Option("SPORTS",'SPORTS'),new Option("长裤",'长裤'));
+        arr_city[1]=new Array(new Option("外套",'外套'),new Option("T恤背心",'T恤背心'),new Option("衬衫",'衬衫'),new Option("SPORTS",'SPORTS'),new Option("针织衫",'针织衫'),new Option("牛仔裤",'牛仔裤'),new Option("束脚裤",'束脚裤'),new Option("紧身裤",'紧身裤'),new Option("裙子·裙裤",'裙子·裙裤'),new Option("连衣裙",'连衣裙'));
+        arr_city[2]=new Array(new Option("外套",'外套'),new Option("T恤背心",'T恤背心'),new Option("休闲衬衫",'休闲衬衫'),new Option("商务衬衫",'商务衬衫'),new Option("SPORTS",'SPORTS'),new Option("长裤",'长裤'),new Option("束脚裤",'束脚裤'));
 		 arr_city[3]=new Array(new Option("W限定L3",'W限定L3'),new Option("M限定L3",'M限定L3'));
         
        for(var i=0;i<arr_prov.length;i++){
