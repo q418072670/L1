@@ -12,8 +12,6 @@
 
 <body>
 	<div class="container">
-
-
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -24,31 +22,51 @@
 					</div>
 					<div class="modal-body">
 						<div class="row">
-							<div class="col-md-4">
-								<select class="form-control">
-									<option>A店</option>
-									<option>B店</option>									
+							<div class="col-md-3">
+								<select class="form-control" id="shoplist">
+									<option value="a">A店</option>
+									<option value="b">B店</option>									
 								</select>
 							</div>
 							<div class="col-md-4">
-								<select class="form-control">
-									<option>WL3</option>
-									<option>ML3</option>
-									<option>通栏</option>									
+								<select class="form-control" id="pageSelect">
+									<option value=''>--请选择类别--</option>							
 								</select>
 							</div>
-							<div class="col-md-4">
-								<select class="form-control">
-									<option>WL3</option>
-									<option>ML3</option>
-									<option>通栏</option>									
+							<div class="col-md-5">
+								<select name="" id="pageSelectlist" class="form-control">
+									<option value=''>--请选择--</option>
 								</select>
 							</div>
 						</div>
+						<div class="row mT">
+							<div class="form-group">
+								<label for="linkname" class="col-sm-3 control-label">请输入Link名称</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control input_width" id="linkname" placeholder="请输入LINK名称">
+								</div>						
+							</div>						
+						</div>
+						<div class="row mT">
+							<div class="form-group">
+								<label for="linkaddress" class="col-sm-3 control-label">请输入Link地址</label>					
+								<div class="col-sm-9">	
+									<input type="text" class="form-control input_width" id="linkaddress" placeholder="请输入LINK地址">
+
+								</div>
+								
+							</div>	
+									
+						</div>
+								<div class="alert alert-success mT" role="alert" id="infoResult">
+									123
+								</div>			
+						
+						
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" id="saveBtn">保存</button>
 					</div>
 				</div>
 			</div>
@@ -131,7 +149,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
 	<script src="./script/urlencode.js"></script>
 	<script src="./script/index.js"></script>
-	<script> 
+	<script>
 		new Clipboard('.btn');
 	</script>
 </body>
