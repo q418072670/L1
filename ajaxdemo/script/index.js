@@ -102,16 +102,10 @@ _('search').onclick = function(){
             pageSelect.options[index] = currentvalue;
         })     
 
+        pushArr(pageSelectlistOption["women"],womenlistArr);
+        pushArr(pageSelectlistOption["men"],menlistArr);
+        pushArr(pageSelectlistOption["限定"],limitedlistArr);
        
-        for(var key in pageSelectlistOption["women"]){            
-            womenlistArr.push(new Option(key,pageSelectlistOption["women"][key]))           
-        }
-        for(var key in pageSelectlistOption["men"]){            
-            menlistArr.push(new Option(key,pageSelectlistOption["men"][key]))     
-        }
-        for(var key in pageSelectlistOption["限定"]){            
-            limitedlistArr.push(new Option(key,pageSelectlistOption["限定"][key]))     
-        }
 
         pageSelectlistArr.push(new Array(new Option("--请选择--","")))
         pageSelectlistArr.push(womenlistArr)
@@ -125,5 +119,11 @@ _('search').onclick = function(){
                 pageSelectlist.options[i] = pageSelectlistArr[index][i];
             }        
         })
+
+        function pushArr(obj,arr){
+            for(var key in obj){
+                arr.push(new Option(key,obj[key]))
+            }
+        }
 
 }()
