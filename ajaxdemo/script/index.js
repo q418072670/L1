@@ -140,21 +140,29 @@ _('saveBtn').addEventListener('click',function(e){
         pageSelectlist = _('pageSelectlist').value,
         linkname = _('linkname').value,
         linkaddress = _('linkaddress').value,
+        infoResult = _('infoResult'),
         url;
-        if(pageSelect != 'TL'){
-            if(linkaddress.split('?')[1] && linkaddress != linkname){
-                url = linkaddress.split('?')[0] + '#' + linkaddress.split('?')[1].split('#')[1]; 
+        if(linkaddress.match(/^http/)){
+            if(pageSelect != 'TL'){
+                if(linkaddress.split('?')[1] && linkaddress != linkname){
+                    url = linkaddress.split('?')[0] + '#' + linkaddress.split('?')[1].split('#')[1]; 
+                }else{
+                    url = linkaddress.split('?')[0]
+                }
             }else{
-                url = linkaddress.split('?')[0]
+                if(shoplist == 'b'){
+                    var bLink = linkaddress.split("scid=");
+                    url = "http://www.uniqlo.cn/search.htm?scid=" + bLink[1].split('&')[0];
+                }else{
+                    url = linkaddress.split('?')[0]
+                }
             }
         }else{
-            if(shoplist == 'b'){
-                var bLink = linkaddress.split("scid=");
-                url = "http://www.uniqlo.cn/search.htm?scid=" + bLink[1].split('&')[0];
-            }else{
-                url = linkaddress.split('?')[0]
-            }
+            infoResult.innerText = '请输入正确的网址信息';
+            infoResult.className = "alert alert-danger mT";
+            infoResult.style.display = "block";
         }
+        
         saveData(url,shoplist,pageSelect,pageSelectlist,linkname);
 })
 
@@ -174,11 +182,11 @@ function saveData(link,shoplist,pageSelect,pageSelectlist,linkname){
 				var data = JSON.parse(request.responseText);
 				if (data.success) { 
 					_("infoResult").innerHTML = data.msg;
-                    _("inforResult").display = "block";
+                    _("infoResult").style.display = "block";
 				} else {
 					_("infoResult").innerHTML = "出现错误：" + data.msg;
                     _("infoResult").className = "alert alert-danger mT"
-                    _("inforResult").display = "block";
+                    _("infoResult").style.display = "block";
 				}
 			} else {
 				alert("发生错误：" + request.status);
