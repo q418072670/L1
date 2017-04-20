@@ -12,9 +12,87 @@
 
 <body>
 	<div class="container">
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">新建</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-4">
+								<select class="form-control">
+									<option>A店</option>
+									<option>B店</option>					
+								</select>
+							</div>
+							<div class="col-md-4">
+								<select class="form-control" id="pageSelect">
+																	
+								</select>
+							</div>
+							<div class="col-md-4">
+								<select name="" id="pageSelectlist" class="form-control"></select>
+							</div>
+						</div>
+						<div class="row mT">
+							<div class="col-md-8">
+								<label for="linkname" class="sr-only">Link名称</label>							
+								<input type="text" class="form-control input_width" id="linkname" placeholder="请输入LINK名称">
+							</div>
+							
+							
+						</div>
+						<div class="row mT">
+							<div class="col-md-8">
+								<label for="linkaddress" class="sr-only">Link地址</label>							
+								<input type="text" class="form-control input_width" id="linkaddress" placeholder="请输入LINK地址">
+							</div>
+							
+							
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						...
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<h1>查询表 <small>L1指示书</small></h1>
+			</div>
+			<div class="col-md-4 modal-nav">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+					新建
+				</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal_2">
+					修改
+				</button>
 			</div>
 		</div>
 
