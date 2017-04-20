@@ -1,6 +1,7 @@
 function _(id) {
     return document.getElementById(id);
 }
+"/ ML3- T恤背心- POLO衫"		
 
 function bindEvent() {
     var b = [[],[]],
@@ -8,13 +9,14 @@ function bindEvent() {
         textCt = ["textWP","textMP"],
         sexyCt = ["WL3","ML3"],
         ab = _('ab').value;
-    keyword = keyword.replace("搜索", "").replace(/\"/g,"").replace(/\/\s/, "\/");
+    keyword = keyword.replace("搜索", "").replace(/\"/g,"");
     var keywordArr = keyword.split("/");
     for (var i = 0; i < keywordArr.length; i++) {
         for (var j = 0; j < keywordArr[i].split("-").length; j++) {
-            b[i][j] = keywordArr[i].split("-")[j];
+            b[i][j] = keywordArr[i].split("-")[j].trim();
         }
-    }        
+    }
+    console.log(b);    
     textCt.forEach(function(currentvalue,index){
         render(currentvalue,b[index].join(""));
     })
@@ -161,6 +163,7 @@ _('saveBtn').addEventListener('click',function(e){
             infoResult.innerText = '请输入正确的网址信息';
             infoResult.className = "alert alert-danger mT";
             infoResult.style.display = "block";
+            return;
         }
         
         saveData(url,shoplist,pageSelect,pageSelectlist,linkname);
@@ -183,6 +186,7 @@ function saveData(link,shoplist,pageSelect,pageSelectlist,linkname){
 				if (data.success) { 
 					_("infoResult").innerHTML = data.msg;
                     _("infoResult").style.display = "block";
+                    _("infoResult").className = "alert alert-success mT"
 				} else {
 					_("infoResult").innerHTML = "出现错误：" + data.msg;
                     _("infoResult").className = "alert alert-danger mT"
