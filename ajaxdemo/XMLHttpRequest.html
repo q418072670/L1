@@ -89,11 +89,13 @@ document.getElementById("save").onclick = function() {
 	var biao=document.getElementById("aa").value;
 	var name=document.getElementById("staffNumber").value; 
 	var link1;
-	if(link0[1]&&wm1!="tl"){
-		if(name==biao){
-			link1=link0.split("?")[0];
+	if(wm1!="tl"){
+		if(link0.split("?")[1]&&name!=biao){
+			link1=link0.split("?")[0]+"#"+link0.split("?")[1].split("#")[1];
+			
 			}else{
-		link1=link0.split("?")[0]+"#"+link0.split("?")[1].split("#")[1];}
+				link1=link0.split("?")[0];
+		}
 	}else{
 			if(document.getElementById("ab1").value=="b"){
 				var linb=link0.split("scid=");
