@@ -145,7 +145,7 @@ _('saveBtn').addEventListener('click',function(e){
             if(linkaddress.split('?')[1] && linkaddress != linkname){
                 url = linkaddress.split('?')[0] + '#' + linkaddress.split('?')[1].split('#')[1]; 
             }else{
-                url = linaddress.split('?')[0]
+                url = linkaddress.split('?')[0]
             }
         }else{
             if(shoplist == 'b'){
