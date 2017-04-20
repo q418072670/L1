@@ -91,8 +91,7 @@ document.getElementById("save").onclick = function() {
 	var link1;
 	if(wm1!="tl"){
 		if(link0.split("?")[1]&&name!=biao){
-			link1=link0.split("?")[0]+"#"+link0.split("?")[1].split("#")[1];
-			
+				link1=link0.split("?")[0]+"#"+link0.split("?")[1].split("#")[1];		
 			}else{
 				link1=link0.split("?")[0];
 		}
@@ -131,9 +130,9 @@ function save_main(obj){
 				}
 			} else {
 				alert("发生错误：" + request.status);
-			}
-		} 
-	}
+				}
+			} 
+		}
 	}
 
 		 var province=document.getElementById("wm");

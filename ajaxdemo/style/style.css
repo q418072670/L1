@@ -17,3 +17,7 @@
 .modal-nav{
     line-height:78px;
 }
+
+#infoResult{
+    display:none;
+}

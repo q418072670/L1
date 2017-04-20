@@ -107,16 +107,10 @@ _('search').onclick = function(){
             pageSelect.options[index] = currentvalue;
         })     
 
+        pushArr(pageSelectlistOption["women"],womenlistArr);
+        pushArr(pageSelectlistOption["men"],menlistArr);
+        pushArr(pageSelectlistOption["限定"],limitedlistArr);
        
-        for(var key in pageSelectlistOption["women"]){            
-            womenlistArr.push(new Option(key,pageSelectlistOption["women"][key]))           
-        }
-        for(var key in pageSelectlistOption["men"]){            
-            menlistArr.push(new Option(key,pageSelectlistOption["men"][key]))     
-        }
-        for(var key in pageSelectlistOption["限定"]){            
-            limitedlistArr.push(new Option(key,pageSelectlistOption["限定"][key]))     
-        }
 
         pageSelectlistArr.push(new Array(new Option("--请选择--","")))
         pageSelectlistArr.push(womenlistArr)
@@ -131,4 +125,66 @@ _('search').onclick = function(){
             }        
         })
 
+        function pushArr(obj,arr){
+            for(var key in obj){
+                arr.push(new Option(key,obj[key]))
+            }
+        }
+
 }()
+
+// 保存按钮逻辑
+_('saveBtn').addEventListener('click',function(e){
+    var shoplist = _('shoplist').value,
+        pageSelect = _('pageSelect').value,
+        pageSelectlist = _('pageSelectlist').value,
+        linkname = _('linkname').value,
+        linkaddress = _('linkaddress').value,
+        url;
+        if(pageSelect != 'TL'){
+            if(linkaddress.split('?')[1] && linkaddress != linkname){
+                url = linkaddress.split('?')[0] + '#' + linkaddress.split('?')[1].split('#')[1]; 
+            }else{
+                url = linkaddress.split('?')[0]
+            }
+        }else{
+            if(shoplist == 'b'){
+                var bLink = linkaddress.split("scid=");
+                url = "http://www.uniqlo.cn/search.htm?scid=" + bLink[1].split('&')[0];
+            }else{
+                url = linkaddress.split('?')[0]
+            }
+        }
+        saveData(url,shoplist,pageSelect,pageSelectlist,linkname);
+})
+
+function saveData(link,shoplist,pageSelect,pageSelectlist,linkname){
+    var request = new XMLHttpRequest();	
+	request.open("POST", "WL3/add.php");
+	var data = "&dian=" + shoplist +
+				"&wm=" + pageSelect + 
+				"&biao=" + pageSelectlist + 
+				"&name=" + linkname + 
+				"&link=" + link;
+	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	request.send(data);
+	request.onreadystatechange = function() {
+		if (request.readyState===4) {
+			if (request.status===200) { 
+				var data = JSON.parse(request.responseText);
+				if (data.success) { 
+					_("infoResult").innerHTML = data.msg;
+                    _("inforResult").display = "block";
+				} else {
+					_("infoResult").innerHTML = "出现错误：" + data.msg;
+                    _("infoResult").className = "alert alert-danger mT"
+                    _("inforResult").display = "block";
+				}
+			} else {
+				alert("发生错误：" + request.status);
+				}
+			} 
+		}
+
+
+}
