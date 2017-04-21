@@ -1,11 +1,6 @@
 function _(id) {
     return document.getElementById(id);
 }
-<<<<<<< HEAD
-=======
-"/ ML3- T恤背心- POLO衫"		
-
->>>>>>> 2aa5295ca73f583b60c40e31ed9bffc33596d5f7
 function bindEvent() {
     var b = [[],[]],
         keyword = document.getElementById('keyword').value,
@@ -19,11 +14,7 @@ function bindEvent() {
             b[i][j] = keywordArr[i].split("-")[j].trim();
         }
     }
-<<<<<<< HEAD
     
-=======
-    console.log(b);    
->>>>>>> 2aa5295ca73f583b60c40e31ed9bffc33596d5f7
     textCt.forEach(function(currentvalue,index){
         render(currentvalue,b[index].join(""));
     });
@@ -75,7 +66,7 @@ _('search').onclick = function(){
             "WL3":"WL3",
             "ML3":"ML3",
 			"KL3":"KL3",
-			"GL3":"GL3",
+			"GL3":"GL3",  
 			"BL3":"BL3",
 			"BABYL3":"BABYL3",
             "通栏":"TL"
@@ -189,47 +180,28 @@ _('saveBtn').addEventListener('click',function(e){
         pageSelectlist = _('pageSelectlist').value,
         linkname = _('linkname').value,
         linkaddress = _('linkaddress').value,
-        infoResult = _('infoResult'),
         url;
-<<<<<<< HEAD
        if(linkaddress.match(/^http/)){
             if(pageSelect != 'TL'){
                 if(linkaddress.split('?')[1] && pageSelectlist != linkname){
                     url = linkaddress.split('?')[0] + '#' + linkaddress.split('?')[1].split('#')[1]; 
                 }else{
                     url = linkaddress.split('?')[0];
-=======
-        if(linkaddress.match(/^http/)){
-            if(pageSelect != 'TL'){
-                if(linkaddress.split('?')[1] && linkaddress != linkname){
-                    url = linkaddress.split('?')[0] + '#' + linkaddress.split('?')[1].split('#')[1]; 
-                }else{
-                    url = linkaddress.split('?')[0]
->>>>>>> 2aa5295ca73f583b60c40e31ed9bffc33596d5f7
                 }
             }else{
                 if(shoplist == 'b'){
                     var bLink = linkaddress.split("scid=");
                     url = "http://www.uniqlo.cn/search.htm?scid=" + bLink[1].split('&')[0];
                 }else{
-<<<<<<< HEAD
                     url = linkaddress.split('?')[0];
-=======
-                    url = linkaddress.split('?')[0]
->>>>>>> 2aa5295ca73f583b60c40e31ed9bffc33596d5f7
                 }
             }
         }else{
             infoResult.innerText = '请输入正确的网址信息';
             infoResult.className = "alert alert-danger mT";
             infoResult.style.display = "block";
-<<<<<<< HEAD
 			return;
-=======
-            return;
->>>>>>> 2aa5295ca73f583b60c40e31ed9bffc33596d5f7
         }
-        
         saveData(url,shoplist,pageSelect,pageSelectlist,linkname);
 });
 
@@ -250,18 +222,10 @@ function saveData(link,shoplist,pageSelect,pageSelectlist,linkname){
 				if (data.success) { 
 					_("infoResult").style.display = "block";
 					_("infoResult").innerHTML = data.msg;
-<<<<<<< HEAD
                     
 				} else {
 					_("infoResult").innerHTML = "出现错误：" + data.msg;
                     _("infoResult").className = "alert alert-danger mT";
-=======
-                    _("infoResult").style.display = "block";
-                    _("infoResult").className = "alert alert-success mT"
-				} else {
-					_("infoResult").innerHTML = "出现错误：" + data.msg;
-                    _("infoResult").className = "alert alert-danger mT"
->>>>>>> 2aa5295ca73f583b60c40e31ed9bffc33596d5f7
                     _("infoResult").style.display = "block";
 				}
 			} else {
