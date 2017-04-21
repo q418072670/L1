@@ -3,8 +3,58 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
+<style>
+.ullist{
+	height:20px;
+	list-style:none;}
+.lilist{
+	 list-style:none;
+	float:left;
+	margin-left:10px}
+</style>
 </head>
 
 <body>
+<button id="search">新建</button>
+<div id="WL3"></div>
+<script>
+document.getElementById("search").onclick = function() { 
+	search_main("WL3/search.php?wm="+'WL3'+"&name="+'外套');
+	
+}
+		
+
+function search_main(lin){
+	var box=document.getElementById("WL3");
+	var request = new XMLHttpRequest();
+	request.open("GET", lin)
+ 	request.send();
+	request.onreadystatechange = function() {
+		if (request.readyState===4&&request.status===200) {
+				var data = JSON.parse(request.responseText);
+					for(var i=0;i<data.length;i++){
+							var ul=document.createElement("ul");
+							ul.className = "ullist";
+							box.appendChild(ul);
+							var ullist=document.getElementsByTagName("ul"); 
+							for(let j=0;j<3;j++){
+								var li=document.createElement("li");
+								li.className = "lilist";
+									ul.appendChild(li);
+									
+								}
+								var lilist=ullist[i].getElementsByTagName("li") 
+								lilist[0].innerHTML=data[i].dian;
+								lilist[1].innerHTML=data[i].name;
+								lilist[2].innerHTML=data[i].link;
+					 		 
+					} 
+				
+				
+			
+		} 
+	}
+}
+</script>
 </body>
 </html>
