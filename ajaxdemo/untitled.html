@@ -4,22 +4,35 @@
 <meta charset="utf-8">
 <title>无标题文档</title>
 <style>
+#WL3{
+	width:700px}
 .ullist{
+	
+	float:left;
+
 	height:20px;
 	list-style:none;}
 .lilist{
 	 list-style:none;
+	 width:20px;
+	float:left;
+	}
+.putlist{
+	float:left;
+	margin-left:10px}
+.bot{
 	float:left;
 	margin-left:10px}
 </style>
 </head>
 
 <body>
-<button id="search">新建</button>
+<button id="search">修改</button>
 <div id="WL3"></div>
+<div id="text1"></div>
 <script>
 document.getElementById("search").onclick = function() { 
-	search_main("WL3/search.php?wm="+'WL3'+"&name="+'外套');
+	search_main("WL3/search.php?wm="+'WL3'+"&name="+'紧身裤'+"&dian="+'a');
 	
 }
 		
@@ -32,21 +45,53 @@ function search_main(lin){
 	request.onreadystatechange = function() {
 		if (request.readyState===4&&request.status===200) {
 				var data = JSON.parse(request.responseText);
-					for(var i=0;i<data.length;i++){
+					for(let i=0;i<data.length;i++){
 							var ul=document.createElement("ul");
+							var ullist=document.getElementsByTagName("ul"); 
 							ul.className = "ullist";
 							box.appendChild(ul);
-							var ullist=document.getElementsByTagName("ul"); 
-							for(let j=0;j<3;j++){
-								var li=document.createElement("li");
-								li.className = "lilist";
-									ul.appendChild(li);
+							var li=document.createElement("li");
+							ul.appendChild(li);
+							li.className="lilist";
+							li.innerHTML=data[i].dian;
+							for(let j=0;j<4;j++){
+								var input=document.createElement("input");
+								input.className = "putlist";
+								
+								ul.appendChild(input);
 									
 								}
-								var lilist=ullist[i].getElementsByTagName("li") 
-								lilist[0].innerHTML=data[i].dian;
-								lilist[1].innerHTML=data[i].name;
-								lilist[2].innerHTML=data[i].link;
+							var putlist=ullist[i].getElementsByTagName("input"); 
+								putlist[0].style.width=100+"px";
+								putlist[0].type="text";
+								putlist[0].value=data[i].name;
+								
+								putlist[1].style.width=400+"px";
+								putlist[1].type="text";
+								putlist[1].value=data[i].link;
+								
+								
+								putlist[2].type="button";
+								putlist[2].value="修改";
+								
+								putlist[3].type="button";
+								putlist[3].value="删除";
+						
+							putlist[2].onclick=function(){
+								var id=data[i].id;
+								var name=ullist[i].getElementsByTagName("input")[0].value;
+								var link=ullist[i].getElementsByTagName("input")[1].value;
+								updata("WL3","紧身裤",id,name,link)
+							}
+							putlist[3].onclick=function(){
+								var id=data[i].id;
+								box.removeChild( box.childNodes[i]); 
+								deldata("WL3","紧身裤",id);
+								
+								
+								
+							}
+								
 					 		 
 					} 
 				
@@ -55,6 +100,56 @@ function search_main(lin){
 		} 
 	}
 }
+function updata(wm,biao,id,name,link){
+	var request = new XMLHttpRequest();
+	console.log(name);
+	request.open("POST", "WL3/updata.php");
+	var data = "&wm=" +wm+ 
+				"&biao=" + biao + 
+				"&name=" + name + 
+				"&id=" + id+ 
+				"&link=" + link;
+	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	request.send(data);
+	request.onreadystatechange = function() {
+		if (request.readyState===4) {
+			if (request.status===200) { 
+				var data = JSON.parse(request.responseText);
+				if (data.success) { 
+					document.getElementById("text1").innerHTML = data.msg;
+				} else {
+					document.getElementById("text1").innerHTML = "出现错误：" + data.msg;
+				}
+			} else {
+				alert("发生错误：" + request.status);
+				}
+			} 
+		}
+	}
+function deldata(wm,biao,id){
+	var request = new XMLHttpRequest();
+	console.log(name);
+	request.open("POST", "WL3/deldata.php");
+	var data = "&wm=" +wm+ 
+				"&biao=" + biao + 
+				"&id=" + id;
+	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	request.send(data);
+	request.onreadystatechange = function() {
+		if (request.readyState===4) {
+			if (request.status===200) { 
+				var data = JSON.parse(request.responseText);
+				if (data.success) { 
+					document.getElementById("text1").innerHTML = data.msg;
+				} else {
+					document.getElementById("text1").innerHTML = "出现错误：" + data.msg;
+				}
+			} else {
+				alert("发生错误：" + request.status);
+				}
+			} 
+		}
+	}	
 </script>
 </body>
 </html>
